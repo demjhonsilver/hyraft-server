@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    hyraft-server (0.1.0.pre.alpha1)
+      rack (~> 3.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.26.0)
+    rack (3.2.3)
+    rake (13.3.0)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  hyraft-server!
+  minitest (~> 5.26)
+  rake (~> 13.3)
+
+BUNDLED WITH
+   2.6.9

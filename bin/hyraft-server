@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "hyraft/server"
+require "hyraft/server/launcher"
+
+cmd = ARGV.shift
+launcher = Hyraft::Server::Launcher.new
+launcher.start(cmd, ARGV)

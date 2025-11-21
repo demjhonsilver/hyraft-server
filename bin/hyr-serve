@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# exe/hyr-serve
+# Short alias for hyraft-server command
+
+require "hyraft/server"
+require "hyraft/server/launcher"
+
+# This is just an alias - pass all arguments to hyraft-server
+cmd = ARGV.shift
+launcher = Hyraft::Server::Launcher.new
+launcher.start(cmd, ARGV)
