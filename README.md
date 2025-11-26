@@ -6,6 +6,8 @@
 ![Downloads](https://img.shields.io/gem/dt/hyraft-server)
 ![License](https://img.shields.io/github/license/demjhonsilver/hyraft-server)
 ![Ruby Version](https://img.shields.io/badge/ruby-%3E%3D%203.4.0-red)
+![Tests](https://github.com/demjhonsilver/hyraft-server/actions/workflows/ci.yml/badge.svg)
+
 
 
 </div>
