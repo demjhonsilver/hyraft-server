@@ -16,9 +16,10 @@
 
 Web server for Hyraft framework
 
-```bash
+____________________
+
 Dual-server web stack implementing hexagonal architecture. Supports simultaneous web and API servers across multiple Ruby backends (Puma, Thin, Falcon, Iodine) for the Hyraft framework.
-```
+
 
 ## Installation
 
