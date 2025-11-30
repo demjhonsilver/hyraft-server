@@ -16,44 +16,21 @@
 
 Web server for Hyraft framework
 
-Dual-server web stack implementing hexagonal architecture. Supports simultaneous web and API servers across multiple Ruby backends (Puma, Thin, Falcon, Iodine) for the Hyraft platform.
+```bash
+Dual-server web stack implementing hexagonal architecture. Supports simultaneous web and API servers across multiple Ruby backends (Puma, Thin, Falcon, Iodine) for the Hyraft framework.
+```
 
 ## Installation
 
-Open Gemfile:
-put:
-
 ```bash
-gem 'hyraft-server'
-```
+Server options:
+___________________________________________________
 
-Switch to Thin # Gemfile in your application (Windows / Linux)
-```bash
-  gem 'thin'
-```
+Use Thin server:      gem 'thin'    # Windows/Linux
+Use Puma server:      gem 'puma'    # Windows/Linux
+Use Falcon server:    gem 'falcon'  # Linux
+Use Iodine server:    gem 'iodine'  # Linux
 
-Switch to Puma # Gemfile in your application (Windows / Linux)
-```bash
-  gem 'puma'
-```
-
-
-Switch server to Falcon # Gemfile in your application (Linux)
-```bash
-  gem 'falcon'
-```
-
-Switch server to Iodine # Gemfile in your application (Linux)
-```bash
-  gem 'iodine'
-```
-
-
-
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle install
 ```
 
 
@@ -61,26 +38,32 @@ bundle install
 
 Command Variants
 ```rb
-Hotkey:
+_______________________________________________________________________
+
+Alias: (or Shortcut)
 
 hyr s [server-name]                        Start web server
 hyr s [server-name] --api                  Start API server directly
 hyr s-v                                    Show version
 hyr s-h                                    Show this help
+_______________________________________________________________________
 
-Shortkey:
+Medium Form:
 
 hyr-serve [server-name]                    Start web server
 hyr-serve [server-name] --api              Start API server directly
 hyr-serve s-v                              Show version
 hyr-serve s-h                              Show this help
+_______________________________________________________________________
 
-Standard:
+Full Command:
 
 hyraft-server [server-name] [options]      Start web server
 hyraft-server [server-name] --api [options] Start API server directly
 hyraft-server server-version               Show version
 hyraft-server server-help                  Show this help
+
+_______________________________________________________________________
 
 Examples:
 
@@ -93,7 +76,10 @@ hyr-serve thin                          # Start web server with Thin
 hyraft-server thin                      # Start web server with Thin
 hyraft-server thin --api                # Start API server with Thin
 hyraft-server puma -p 1091              # Start web server on port 1091
+hyraft-server puma --port-api 1092      # Start API server on port 1092
 hyraft-server falcon --http2            # Start with HTTP/2 (Falcon)
+hyraft-server falcon --http3            # Start with HTTP/3 (Falcon)
+_______________________________________________________________________
 
 
 ```
@@ -103,7 +89,7 @@ hyraft-server falcon --http2            # Start with HTTP/2 (Falcon)
 Test Environment
 ```rb
 
-Hotkey:
+Alias: (or Shortcut)
 
 APP_ENV=test hyr s [server-name]                        Start web server (test)
 APP_ENV=test hyr s [server-name] --api                  Start API server directly (test)
@@ -126,7 +112,7 @@ APP_ENV=test hyr s falcon
 Production Environment
 ```rb
 
-Hotkey:
+Alias: (or Shortcut)
 
 APP_ENV=production hyr s [server-name]                        Start web server (production)
 APP_ENV=production hyr s [server-name] --api                  Start API server directly (production)

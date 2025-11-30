@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata = {
     "homepage_uri"     => "https://github.com/demjhonsilver/hyraft-server",
+    "documentation_uri" => "https://www.rubydoc.info/gems/hyraft-server",
     "source_code_uri"  => "https://github.com/demjhonsilver/hyraft-server/tree/main",
     "changelog_uri"    => "https://github.com/demjhonsilver/hyraft-server/blob/main/CHANGELOG.md"
   }
