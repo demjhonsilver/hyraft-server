@@ -11,8 +11,8 @@ class Hyraft::LauncherTest < Minitest::Test
     options = @launcher.instance_variable_get(:@options)
     
     assert_equal "localhost", options[:host]
-    assert_equal 1091, options[:port]
-    assert_equal "infra/server/web-server.ru", options[:rack_socket]
+    assert_equal 1025, options[:port]
+    assert_equal "setup/server/web-server.ru", options[:rack_socket]
     refute options[:http2]
     refute options[:http3]
   end

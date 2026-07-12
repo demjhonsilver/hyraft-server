@@ -8,6 +8,8 @@ module Hyraft
         cyan: "\e[36m",
         green: "\e[32m",
         yellow: "\e[33m", 
+        light_red: "\033[91m",      # Add light red for web
+        navy_blue: "\033[38;2;0;0;128m",  # Navy blue (using RGB)
         red: "\e[31m",
         magenta: "\e[35m"
     }

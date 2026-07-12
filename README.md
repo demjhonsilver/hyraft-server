@@ -5,7 +5,7 @@
 [![Gem Version](https://badge.fury.io/rb/hyraft-server.svg?icon=si%3Arubygems&icon_color=%23ffffff)](https://badge.fury.io/rb/hyraft-server)
 ![Downloads](https://img.shields.io/gem/dt/hyraft-server)
 ![License](https://img.shields.io/github/license/demjhonsilver/hyraft-server)
-![Ruby Version](https://img.shields.io/badge/ruby-%3E%3D%203.4.0-red)
+![Ruby Version](https://img.shields.io/badge/ruby-%3E%3D%204.0.0-blue)
 ![Tests](https://github.com/demjhonsilver/hyraft-server/actions/workflows/ci.yml/badge.svg)
 
 
@@ -14,7 +14,7 @@
 
 
 
-Web server for Hyraft framework
+Server for Hyraft framework
 
 ____________________
 
@@ -76,8 +76,8 @@ hyr s falcon                            # Start web server with  Falcon
 hyr-serve thin                          # Start web server with Thin
 hyraft-server thin                      # Start web server with Thin
 hyraft-server thin --api                # Start API server with Thin
-hyraft-server puma -p 1091              # Start web server on port 1091
-hyraft-server puma --port-api 1092      # Start API server on port 1092
+hyraft-server puma -p 1025              # Start web server on port 1025
+hyraft-server puma --port-api 1126      # Start API server on port 1126
 hyraft-server falcon --http2            # Start with HTTP/2 (Falcon)
 hyraft-server falcon --http3            # Start with HTTP/3 (Falcon)
 _______________________________________________________________________

@@ -13,7 +13,7 @@ module Hyraft
     #
     #   hyr s thin                              # Start web server with Thin
     #   hyr s thin --api                        # Start API server with Thin  
-    #   hyraft-server puma -p 3000              # Start on custom port
+    #   hyraft-server puma -p 1025              # Start on custom port
     #   hyraft-server falcon --http2            # Start with HTTP/2
     #
     # @example Start a web server
@@ -28,6 +28,9 @@ module Hyraft
       COLORS = {
         lime: "\033[92m",
         yellow: "\033[93m",
+        light_red: "\033[91m", 
+        green: "\e[32m",
+        red: "\e[31m",
         reset: "\033[0m"
       }
 
@@ -36,8 +39,8 @@ module Hyraft
       # @param options [Hash] Configuration options
       # @option options [String] :server Server type (puma, thin, falcon, iodine)
       # @option options [String] :host Host to bind to (default: "localhost")
-      # @option options [Integer] :port Web server port (default: 1091)
-      # @option options [Integer] :port_api API server port (default: 1092)
+      # @option options [Integer] :port Web server port (default: 1025)
+      # @option options [Integer] :port_api API server port (default: 1126)
       # @option options [String] :rack_socket Rack config file for web server
       # @option options [String] :rack_socket_api Rack config file for API server
       # @option options [Boolean] :http2 Enable HTTP/2 (Falcon only)
@@ -48,15 +51,15 @@ module Hyraft
       #   Launcher.new
       #
       # @example With custom options
-      #   Launcher.new(port: 3000, server: 'puma')
+      #   Launcher.new(port: 1025, server: 'puma')
       def initialize(options = {})
         @options = {
           server: nil,
           host: "localhost",
-          port: 1091,
-          port_api: 1092,
-          rack_socket: "infra/server/web-server.ru",
-          rack_socket_api: "infra/server/api-server.ru",
+          port: 1025,
+          port_api: 1126,
+          rack_socket: "setup/server/web-server.ru",
+          rack_socket_api: "setup/server/api-server.ru",
           http2: false,
           http3: false,
           api: false
@@ -131,19 +134,19 @@ module Hyraft
       #
       # == Command Variants
       #
-      # Hotkey:
+      # Alias: (or Shortcut)
       #   hyr s [server-name]                        Start web server
       #   hyr s [server-name] --api                  Start API server directly
       #   hyr s-v                                    Show version
       #   hyr s-h                                    Show this help
       #
-      # Shortkey:
+      # Medium Form:
       #   hyr-serve [server-name]                    Start web server
       #   hyr-serve [server-name] --api              Start API server directly
       #   hyr-serve s-v                              Show version
       #   hyr-serve s-h                              Show this help
       #
-      # Standard:
+      # Full Command:
       #   hyraft-server [server-name] [options]      Start web server
       #   hyraft-server [server-name] --api [options] Start API server directly
       #   hyraft-server server-version               Show version
@@ -155,8 +158,10 @@ module Hyraft
       #   hyr-serve thin                          # Start web server with Thin
       #   hyraft-server thin                      # Start web server with Thin
       #   hyraft-server thin --api                # Start API server with Thin
-      #   hyraft-server puma -p 1091              # Start web server on port 1091
+      #   hyraft-server puma -p 1025              # Start web server on port 1025
+      #   hyraft-server puma --port-api 1126      # Start API server on port 1126
       #   hyraft-server falcon --http2            # Start with HTTP/2 (Falcon)
+      #   hyraft-server falcon --http3            # Start with HTTP/3 (Falcon)
       #
       # @return [void]
       def show_usage
@@ -193,8 +198,8 @@ module Hyraft
         puts "#{header_color}Options:#{reset_color}"
         puts "  -s, --server SERVER    Server (puma, thin, falcon, iodine)"
         puts "  -b, --bind HOST        Host (default: localhost)"
-        puts "  -p, --port PORT        Port (default: 1091)"
-        puts "  --port-api PORT        API Port (default: 1092)"
+        puts "  -p, --port PORT        Port (default: 1025)"
+        puts "  --port-api PORT        API Port (default: 1126)"
         puts "  -c, --config FILE      Rack config file"
         puts "  --config-api FILE      API Rack config file"
         puts "  --api                  Enable API server"
@@ -207,7 +212,7 @@ module Hyraft
         puts "#{example_color}  hyr-serve thin                          #{reset_color}# Start web server with Thin - Shortkey"
         puts "#{example_color}  hyraft-server thin                      #{reset_color}# Start web server with Thin"
         puts "#{example_color}  hyraft-server thin --api                #{reset_color}# Start API server with Thin"
-        puts "#{example_color}  hyraft-server puma -p 1091              #{reset_color}# Start web server on port 1091"
+        puts "#{example_color}  hyraft-server puma -p 1025              #{reset_color}# Start web server on port 1025"
         puts "#{example_color}  hyraft-server falcon --http2            #{reset_color}# Start with HTTP/2 (Falcon)"
         puts "#{example_color}  hyraft-server s thin                    #{reset_color}# Legacy syntax (still works)"
       end
@@ -241,7 +246,7 @@ module Hyraft
           opts.on("-s", "--server SERVER", "Server (puma, thin, falcon, iodine)") { |v| @options[:server] = v }
           opts.on("-b", "--bind HOST", "Host") { |v| @options[:host] = v }
           opts.on("-p", "--port PORT", Integer, "Port") { |v| @options[:port] = v }
-          opts.on("--port-api PORT", Integer, "API Port (default: 1092)") { |v| @options[:port_api] = v }
+          opts.on("--port-api PORT", Integer, "API Port (default: 1126)") { |v| @options[:port_api] = v }
           opts.on("-c", "--config FILE", "Rack config file") { |v| @options[:rack_socket] = v }
           opts.on("--config-api FILE", "API Rack config file") { |v| @options[:rack_socket_api] = v }
           opts.on("--api", "Enable API server") { |v| @options[:api] = v }
@@ -271,7 +276,7 @@ module Hyraft
       # @return [void]
       # @!visibility private
       def launch_web_server
-        puts "[ WEB ] - Hyraft"
+        puts "#{COLORS[:yellow]}[ WEB ] - Hyraft#{COLORS[:reset]}"
         puts "* Using server: #{@options[:server].capitalize}"
         puts "* Listening on #{COLORS[:yellow]}http://#{@options[:host]}:#{@options[:port]}#{COLORS[:reset]}"
 
@@ -302,9 +307,12 @@ module Hyraft
       # @return [void]
       # @!visibility private
       def launch_api_server
-        puts "[ API ] - Hyraft"
+
+
+        
+        puts "#{COLORS[:lime]}[ API ] - Hyraft#{COLORS[:reset]}"
         puts "* Using server: #{@options[:server].capitalize}"
-        puts "* Listening on #{COLORS[:yellow]}http://#{@options[:host]}:#{@options[:port_api]}#{COLORS[:reset]}"
+        puts "* Listening on #{COLORS[:lime]}http://#{@options[:host]}:#{@options[:port_api]}#{COLORS[:reset]}"
 
         case @options[:server]
         when "puma"

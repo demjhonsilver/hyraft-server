@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description = "Dual-server Hyraft framework with hexagonal architecture, supporting Puma, Thin, Falcon, and Iodine."
   spec.homepage = "https://github.com/demjhonsilver/hyraft-server"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.4.0"
+  spec.required_ruby_version = ">= 4.0.0"
 
 
   spec.metadata = {
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
     "changelog_uri"    => "https://github.com/demjhonsilver/hyraft-server/blob/main/CHANGELOG.md"
   }
 
-  spec.metadata["rubygems_mfa_required"] = "true"
+   spec.metadata["rubygems_mfa_required"] = "true"
 
 
   spec.files         = Dir["bin/*", "lib/**/*", "README.md", "LICENSE.txt"]
@@ -31,6 +31,6 @@ Gem::Specification.new do |spec|
 
   # Runtime dependencies
   spec.add_dependency "rack", "~> 3.2"
-  spec.add_development_dependency "rake", "~> 13.3"
-  spec.add_development_dependency "minitest", "~> 5.26"
+  # spec.add_development_dependency "rake", "~> 13.3"
+ # spec.add_development_dependency "minitest", "~> 5.26"
 end
